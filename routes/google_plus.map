@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "google_plus.js",
+  "sourceRoot": "",
+  "sources": [
+    "google_plus.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,CAAA,CAAe,CAAf,GAAO,EAAS;CACd,CAA+C,CAAnB,CAA5B,CAAkC,CAA5B,IAAN,EAAA,KAAA;CACI,EAAD,CAAH,OAAA,cAAA;CAFF,EAAe;CAAf"
+}

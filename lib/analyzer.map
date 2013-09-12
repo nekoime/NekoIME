@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "analyzer.js",
+  "sourceRoot": "",
+  "sources": [
+    "analyzer.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,CAAA,CAAW,CAAV,EAAU,CAAX,CAAW,CAAC;CACD,OAAT,GAAA;OAAU;CAAA,CAAO,EAAN,GAAM,CAAN,sDAAM;CAAP,CAAiG,IAAR,EAAA;QAA1F;CADA,CAC4G,IAArH;CADF,EAAW;CAAX"
+}

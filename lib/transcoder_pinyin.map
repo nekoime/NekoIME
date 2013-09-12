@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "transcoder_pinyin.js",
+  "sourceRoot": "",
+  "sources": [
+    "transcoder_pinyin.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,KAAA;;CAAA,CAAA,CAAS,GAAT,CAAS,GAAA;;CAAT,CACA,CAAa,CAAZ,KAAD;CACS,CACL,EADF,EAAA,KAAA;CACE,CAAO,GAAP,CAAA,MAAA;CAFS,KACX;CAFF,EACa;CADb"
+}
