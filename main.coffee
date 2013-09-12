@@ -5,12 +5,13 @@ analyzer = require './lib/analyzer'
 transcoder_pinyin = require './lib/transcoder_pinyin'
 exporter_sogou = require './lib/exporter_sogou'
 exporter_google = require './lib/exporter_google'
+exporter_sunpinyin = require './lib/exporter_sunpinyin'
 
 #type:article, tag, username
 #MongoClient.connect 'mongodb://master.my-card.in:27017/NekoIME', (err, db)->
 #  throw err if err
 
-exporter_google.start()
+exporter_sunpinyin.start()
 setImmediate ->
   #articles = db.collection('articles')
   #words = db.collection('articles')
@@ -24,7 +25,8 @@ setImmediate ->
         #for word in updated_words
           #words.findAndModify word:word, 'word', weight: $inc: word.weight_relative
         #exporter_sogou.update(new_words, updated_words)
-        exporter_google.update(new_words, updated_words)
+        #exporter_google.update(new_words, updated_words)
+        exporter_sunpinyin.update(new_words, updated_words)
 
 
 

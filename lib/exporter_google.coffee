@@ -12,4 +12,4 @@ ffi = require 'ffi'
   #ffi.DynamicLibrary 'gpy_dict_api.dll', ffi.DynamicLibrary.FLAGS.RTLD_LOCAL
 
 
-gpy_dict_api = ffi.DynamicLibrary 'C:\\Program Files (x86)\\Google\\Google Pinyin 2\\gpy_dict_api.dll', ffi.DynamicLibrary.FLAGS.RTLD_GLOBAL
+#gpy_dict_api = ffi.DynamicLibrary 'C:\\Program Files (x86)\\Google\\Google Pinyin 2\\gpy_dict_api.dll', ffi.DynamicLibrary.FLAGS.RTLD_GLOBAL
