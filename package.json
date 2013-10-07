@@ -1,15 +1,36 @@
 {
-  "name": "neko-ime",
-  "version": "0.0.1",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "mongodb": "*",
-    "sqlite3": "*",
-    "request": "*",
-    "pinyinjs": "*",
-    "ffi": "*",
-    "iconv": "*"
-  }
+    "name": "NekoIME-analyser",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "sqlite3": "*",
+        "request": "*",
+        "pinyinjs": "*",
+        "ffi": "*",
+        "iconv": "*",
+        "require-all": "*",
+        "tracer": "*",
+        "optimist": "*",
+        "lodash": "2.2.1",
+        "nedb": "0.8.x",
+        "wait.for": "0.6.x",
+        "EventEmitter2": "0.4.x",
+        "messenger": "*",
+        "underscore": "^1.6.0",
+        "underscore.string": "^2.3.3",
+        "opencc": "^1.0.0"
+    },
+    "main": "analyser.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/NekoIME/NekoIME.git"
+    },
+    "author": "zh99998 <zh99998@gmail.com>",
+    "license": "GPLv3",
+    "bugs": {
+        "url": "https://github.com/NekoIME/NekoIME/issues"
+    },
+    "homepage": "https://github.com/NekoIME/NekoIME"
 }
