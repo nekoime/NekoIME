@@ -5,11 +5,18 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "mongodb": "*",
     "sqlite3": "*",
     "request": "*",
     "pinyinjs": "*",
     "ffi": "*",
-    "iconv": "*"
+    "iconv": "*",
+    "require-all":"*",
+    "tracer":"*",
+    "optimist":"*",
+    "lodash":"2.2.1",
+    "nedb":"0.8.x",
+    "wait.for":"0.6.x",
+    "EventEmitter2":"0.4.x",
+    "messenger":"*"
   }
 }

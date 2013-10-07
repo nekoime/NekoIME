@@ -1,6 +1,9 @@
 fs = require 'fs'
 spawn = require('child_process').spawn
-
+Server.registerExporter
+  name:'SunPinyin'
+  platform:['Linux']
+  transcoder:'pinyin'
 words = []
 @start = ->
   setInterval @do_update, 3600 #000
