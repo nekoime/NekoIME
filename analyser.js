@@ -26,7 +26,7 @@
 
     min_cohesion = 300;
 
-    min_entropy = 100;
+    min_entropy = 10;
 
     combinations = function (word, allow_whole) {
         var first_part, i, rest_part, result, s, _i, _j, _len, _ref;

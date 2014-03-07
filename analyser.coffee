@@ -13,7 +13,7 @@ _.mixin(_.str.exports());
 max_length = 6 #最大长度
 min_frequencies = 20 #最小词频
 min_cohesion = 300 #最小凝固度, 参考 http://www.matrix67.com/blog/archives/5044
-min_entropy = 100 #自由程度， 同上
+min_entropy = 10 #自由程度， 同上
 
 #求一个词的可能的组合，只想到了递归实现，于是写成函数了
 #"喵帕斯" => ["喵", "帕", "斯"], ["喵帕", "斯"], ["喵", "帕斯"]
