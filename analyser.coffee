@@ -11,9 +11,9 @@ _.mixin(_.str.exports());
 
 
 max_length = 6 #最大长度
-min_frequencies = 20 #最小词频
+#min_frequencies = 20 #最小词频改成 Math.log total_length 了，不同规模的输入不好统一词频..
 min_cohesion = 300 #最小凝固度, 参考 http://www.matrix67.com/blog/archives/5044
-min_entropy = 10 #自由程度， 同上
+min_entropy = 1 #自由程度， 同上
 
 #求一个词的可能的组合，只想到了递归实现，于是写成函数了
 #"喵帕斯" => ["喵", "帕", "斯"], ["喵帕", "斯"], ["喵", "帕斯"]
@@ -66,13 +66,14 @@ if process.argv[0]
     memo + sentence.length
   , 0
 
+  min_frequencies = Math.log total_length
+
   #作为基础词库，已有的词就不再列出了
   #词库取自sunpinyin
   sysdict = _.lines fs.readFileSync('sysdict.txt', encoding: 'utf8')
   console.error "load #{sysdict.length} system words"
 
   for word, count of words when count >= min_frequencies and word.length >= 2
-
     #去除已知词库中的词
     continue if word in sysdict
 
@@ -92,41 +93,48 @@ if process.argv[0]
 
     #自由度
 
-    #左邻字信息熵
-    neibors = {}
+
+    left_neibors = {}
+    right_neibors = {}
+    left_border = 0
+    right_border = 0
     for sentence in sentences
-      parts = sentence.split word
-      parts.pop()
-      for part in parts
-        neibor = part[part.length - 1]
-        if neibors[neibor]
-          neibors[neibor]++
+
+      index = 0
+      while (index = sentence.indexOf(word, index)) != -1
+        left_neibor = sentence[index - 1]
+        index += word.length
+        right_neibor = sentence[index]
+
+        if left_neibor
+          if left_neibors[left_neibor]
+            left_neibors[left_neibor]++
+          else
+            left_neibors[left_neibor] = 1
         else
-          neibors[neibor] = 1
-    entropy = _.reduce neibors, (memo, c)->
-      memo + -Math.log(c / count) / c
+          left_border++
+
+        if right_neibor
+          if right_neibors[right_neibor]
+            right_neibors[right_neibor]++
+          else
+            right_neibors[right_neibor] = 1
+        else
+          right_border++
+
+    left_entropy = _.reduce left_neibors, (memo, c)->
+      memo + -Math.log(c / count) * c / (count - left_border)
     , 0
 
-    continue if entropy < min_entropy
+    continue if left_entropy < min_entropy
 
-    #右邻字信息熵
-    neibors = {}
-    for sentence in sentences
-      parts = sentence.split word
-      parts.shift()
-      for part in parts
-        neibor = part[0]
-        if neibors[neibor]
-          neibors[neibor]++
-        else
-          neibors[neibor] = 1
-    entropy = _.reduce neibors, (memo, c)->
-      memo + -Math.log(c / count) / c
+    right_entropy = _.reduce right_neibors, (memo, c)->
+      memo + -Math.log(c / count) * c / (count - right_border)
     , 0
 
-    continue if entropy < min_entropy
+    continue if right_entropy < min_entropy
 
-    console.log word, count #, cohesion, entropy
+    console.log word, count, parseInt(cohesion), Math.min left_entropy, right_entropy
 
   console.error 'done'
 
