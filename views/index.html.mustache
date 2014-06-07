@@ -1,0 +1,35 @@
+<h1 class="page-header">概览</h1>
+
+<div id="dashboard" class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <a href="/profile"><img src="{{user_image}}" class="img-responsive" alt="Generic placeholder thumbnail"></a>
+        <h4>个人</h4>
+        <span class="text-muted">{{user_name}}</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <a href="/words"><img data-src="holder.js/200x200/auto/words/text:{{words_count}}" class="img-responsive" alt="Generic placeholder thumbnail"></a>
+        <h4>词库</h4>
+        <span class="text-muted">同步于 {{user_updated_at}}</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <a href="/sources"><img data-src="holder.js/200x200/auto/sources/text:{{sources_count}}" class="img-responsive" alt="Generic placeholder thumbnail"></a>
+        <h4>来源</h4>
+        <span class="text-muted">{{sources_count}} 个来源</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <a href="/backends/{{backend}}/config"><img src="/backends/{{backend}}/logo.png" class="img-responsive" alt="Generic placeholder thumbnail"></a>
+        <h4>输入法</h4>
+        <span class="text-muted">{{backend}}</span>
+    </div>
+</div>
+
+<h2 class="sub-header">热词</h2>
+<div id="d3_cloud_words"></div>
+<script>
+    window.d3_cloud_words = [
+        {{#words}}
+        {text: '{{word}}', size: '{{frequencies}}'},
+        {{/words}}
+    ]
+    console.log(window.d3_cloud_words)
+</script>

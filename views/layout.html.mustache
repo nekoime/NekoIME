@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/icon.png">
+
+    <title>NekoIME - 管理面板</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/bootstrap-switch.min.css" rel="stylesheet">
+
+    <link href="/css/dropzone.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.css">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NekoIME</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">管理面板</a></li>
+            </ul>
+            <!--<form class="navbar-form navbar-right">
+              <input type="text" class="form-control" placeholder="Search...">
+            </form>-->
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li{{#nav_index}} class="active"{{/nav_index}}><a href="/">概览</a></li>
+                <li{{#nav_profile}} class="active"{{/nav_profile}}><a href="/profile">个人</a></li>
+                <li>{{#nav_words}} class="active"{{/nav_words}}<a href="/words">词库</a></li>
+                <li>{{#nav_sources}} class="active"{{/nav_sources}} <a href="/sources">来源</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            {{{ yield }}}
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery-2.1.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootbox.min.js"></script>
+<script src="/js/bootstrap-switch.min.js"></script>
+<script src="/js/holder.js"></script>
+<script src="/js/dropzone.js"></script>
+<script src="/js/pinyin.jq.min.js"></script>
+<script src="/js/d3.min.js"></script>
+<script src="/js/pinyin.jq.min.js"></script>
+<script src="/js/d3.layout.cloud.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="/js/dataTables.bootstrap.js"></script>
+
+<script>
+    Dropzone.options.dropzone = {
+        parallelUploads: Number.MAX_VALUE,
+        uploadMultiple: true,
+        acceptedFiles: 'text/plain',
+        dictInvalidFileType: '不支持的文件类型',
+        init: function(){
+            this.on('successmultiple', function(file, message){alert(message)})
+        }
+    }
+
+    var table = $('#words').dataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/words",
+        "order": [[ 4, "desc" ]],
+        "columns": [
+            { "name": "word" },
+            { "name": "frequencies" },
+            { "name": "pinyin" },
+            { "name": "source" },
+            { "name": "updated_at" }
+        ],
+
+        "language": {
+            "emptyTable": "表中数据为空",
+            "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "infoFiltered": "(由 _MAX_ 项结果过滤)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "显示 _MENU_ 项结果",
+            "loadingRecords": "载入中...",
+            "processing": "处理中...",
+            "search": "搜索:",
+            "zeroRecords": "没有匹配结果",
+            "paginate": {
+                "first": "首页",
+                "last": "末页",
+                "next": "下页",
+                "previous": "上页"
+            },
+            "aria": {
+                "sortAscending": ": 以升序排列此列",
+                "sortDescending": ": 以降序排列此列"
+
+            }
+        }
+    } );
+    $("#words tfoot th").each( function ( i ) {
+        var select = $('<select><option value=""></option></select>')
+                .appendTo( $(this).empty() )
+                .on( 'change', function () {
+                    table.column( i )
+                            .search( $(this).val() )
+                            .draw();
+                } );
+
+        table.column( i ).data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        } );
+    } );
+
+    Holder.add_theme("words", { "background": '#0D8FDB', "foreground": '#fff', "size": 50 })
+    Holder.add_theme("sources", { "background": '#39DBAC', "foreground": '#1E292C', "size": 50 })
+
+    $("input.bootstrap-switch[type=checkbox]").bootstrapSwitch();
+
+    if(window.d3_cloud_words){
+
+        w = $('#d3_cloud_words').width()
+        h = 288
+
+        var fill = d3.scale.category20();
+        d3.layout.cloud().size([w, h])
+                .words(window.d3_cloud_words)
+                .padding(5)
+                .rotate(function() { return ~~(Math.random() * 2) * 90; })
+                .font("Impact")
+                .fontSize(function(d) { return Math.sqrt(d.size) * 1.5; })
+                .on("end", draw)
+                .start();
+
+
+
+        function draw(words) {
+            d3.select("#d3_cloud_words").append("svg")
+                    .attr("width", w)
+                    .attr("height", h)
+                    .append("g")
+                    .attr("transform", "translate("+w/2+","+h/2+")")
+                    .selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                    .style("font-size", function(d) { return d.size + "px"; })
+                    .style("font-family", "Impact")
+                    .style("fill", function(d, i) { return fill(i); })
+                    .attr("text-anchor", "middle")
+                    .attr("transform", function(d) {
+                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    .text(function(d) { return d.text; });
+        }
+    }
+
+</script>
+<script src="/js/app.js"></script>
+</body>
+</html>

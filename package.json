@@ -1,22 +1,23 @@
 {
-  "name": "neko-ime",
+  "name": "nekoime",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "sqlite3": "*",
-    "request": "*",
-    "pinyinjs": "*",
-    "ffi": "*",
-    "iconv": "*",
-    "require-all":"*",
-    "tracer":"*",
-    "optimist":"*",
-    "lodash":"2.2.1",
-    "nedb":"0.8.x",
-    "wait.for":"0.6.x",
-    "EventEmitter2":"0.4.x",
-    "messenger":"*"
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "express": "~4.2.0",
+    "formidable": "*",
+    "hogan-express": "*",
+    "morgan": "~1.0.0",
+    "nedb": "^0.10.5",
+    "pinyin": "^2.2.1",
+    "request": "^2.36.0",
+    "static-favicon": "~1.0.0",
+    "stylus": "0.42.3",
+    "tmp": "0.0.23"
   }
 }

@@ -1,0 +1,48 @@
+<h1 class="page-header">个人</h1>
+
+<div class="media">
+    <a class="pull-left" href="#">
+        <img class="media-object" src="{{user_image}}" alt="...">
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">{{user_name}}</h4>
+        <button class="btn btn-default">退出帐号</button>
+    </div>
+</div>
+
+<h2 class="sub-header">设置</h2>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" checked> 系统开机时自动运行
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" checked> 有新词时弹出提示
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" checked>
+                    <span>自动同步每</span>
+                    <input type="number" class="form-control" value="4" style="display:inline;width:60px">
+                    <span>小时</span>
+                </label>
+            </div>
+            <p class="help-block">最近同步于: {{user_updated_at}} <button class="btn btn-default">立即同步</button></p>
+        </div>
+    </div>
+</form>

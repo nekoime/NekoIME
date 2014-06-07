@@ -1,0 +1,25 @@
+<h1 class="page-header">来源</h1>
+
+<div id="sources" class="row placeholders">
+    {{#sources}}{{#logo}}
+
+    <div class="col-xs-4 col-sm-2">
+        <img src="/sources/{{id}}/logo.png" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4>{{name}}</h4>
+        <span class="text-muted clearfix">{{count}} 个词语</span>
+
+        <input type="checkbox" class="bootstrap-switch" data-size="small" data-on-text="启用" data-off-text="停用" checked>
+    </div>
+    {{/logo}}{{/sources}}
+
+</div>
+
+{{#sources}}{{#dropzone}}
+<h2 class="sub-header">{{name}} <small>{{count}} 个词语</small> <button class="btn btn-default pull-right">清除数据</button></h2>
+
+<form action="/sources/{{id}}" class="dropzone" id="dropzone">
+    <div class="fallback">
+        <input name="file" type="file" multiple />
+    </div>
+</form>
+{{/dropzone}}{{/sources}}
